@@ -1,0 +1,124 @@
+[
+  {
+    "id": "1",
+    "name": "Classic White T-Shirt",
+    "description": "A timeless white t-shirt made from premium cotton for everyday comfort and style.",
+    "price": 29.99,
+    "image": "/placeholder.svg?height=600&width=600",
+    "category": "clothing",
+    "featured": true,
+    "color": "white",
+    "size": "M"
+  },
+  {
+    "id": "2",
+    "name": "Slim Fit Jeans",
+    "description": "Modern slim fit jeans with a comfortable stretch fabric that moves with you.",
+    "price": 59.99,
+    "image": "/placeholder.svg?height=600&width=600",
+    "category": "clothing",
+    "featured": true,
+    "color": "blue",
+    "size": "32"
+  },
+  {
+    "id": "3",
+    "name": "Leather Crossbody Bag",
+    "description": "Elegant leather crossbody bag with multiple compartments for all your essentials.",
+    "price": 89.99,
+    "image": "/placeholder.svg?height=600&width=600",
+    "category": "accessories",
+    "featured": true,
+    "color": "black"
+  },
+  {
+    "id": "4",
+    "name": "Minimalist Watch",
+    "description": "A sleek minimalist watch with a stainless steel case and premium leather strap.",
+    "price": 129.99,
+    "image": "/placeholder.svg?height=600&width=600",
+    "category": "accessories",
+    "color": "brown"
+  },
+  {
+    "id": "5",
+    "name": "Summer Floral Dress",
+    "description": "Light and breezy floral dress perfect for summer days and special occasions.",
+    "price": 79.99,
+    "image": "/placeholder.svg?height=600&width=600",
+    "category": "clothing",
+    "featured": true,
+    "color": "multi",
+    "size": "S"
+  },
+  {
+    "id": "6",
+    "name": "Canvas Sneakers",
+    "description": "Classic canvas sneakers that go with everything in your wardrobe.",
+    "price": 49.99,
+    "image": "/placeholder.svg?height=600&width=600",
+    "category": "shoes",
+    "sale": true,
+    "color": "white",
+    "size": "9"
+  },
+  {
+    "id": "7",
+    "name": "Oversized Sunglasses",
+    "description": "Stylish oversized sunglasses with UV protection for those sunny days.",
+    "price": 39.99,
+    "image": "/placeholder.svg?height=600&width=600",
+    "category": "accessories",
+    "color": "black"
+  },
+  {
+    "id": "8",
+    "name": "Linen Blazer",
+    "description": "Lightweight linen blazer for a sophisticated casual look.",
+    "price": 149.99,
+    "image": "/placeholder.svg?height=600&width=600",
+    "category": "clothing",
+    "color": "beige",
+    "size": "L"
+  },
+  {
+    "id": "9",
+    "name": "Leather Ankle Boots",
+    "description": "Premium leather ankle boots with a comfortable heel and durable sole.",
+    "price": 119.99,
+    "image": "/placeholder.svg?height=600&width=600",
+    "category": "shoes",
+    "sale": true,
+    "color": "brown",
+    "size": "8"
+  },
+  {
+    "id": "10",
+    "name": "Silk Scarf",
+    "description": "Luxurious silk scarf with a vibrant pattern to elevate any outfit.",
+    "price": 69.99,
+    "image": "/placeholder.svg?height=600&width=600",
+    "category": "accessories",
+    "color": "multi"
+  },
+  {
+    "id": "11",
+    "name": "Denim Jacket",
+    "description": "Classic denim jacket that never goes out of style.",
+    "price": 89.99,
+    "image": "/placeholder.svg?height=600&width=600",
+    "category": "clothing",
+    "color": "blue",
+    "size": "M"
+  },
+  {
+    "id": "12",
+    "name": "Leather Wallet",
+    "description": "Compact leather wallet with multiple card slots and a coin pocket.",
+    "price": 45.99,
+    "image": "/placeholder.svg?height=600&width=600",
+    "category": "accessories",
+    "featured": true,
+    "color": "black"
+  }
+]
