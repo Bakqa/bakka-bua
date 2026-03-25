@@ -1,0 +1,271 @@
+/* @import "globals.css"; */
+
+.wrapheader {
+  display: flex;
+  width: 100%;
+  height: 5rem;
+  background-color: cadetblue;
+  justify-content: space-between;
+  padding: 0 13px;
+  overflow: visible;
+}
+.logo {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  top: -5px;
+  left: -15px;
+}
+.platforms {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  transition: all 0.3s ease;
+}
+.pagelink {
+  position: relative;
+  transition: 0.3s ease;
+  overflow: hidden;
+}
+.pagelink:hover,
+.pagelink:active {
+  transform: translateY(13px);
+  .mobile {
+    color: black;
+  }
+}
+.pagelink:hover:nth-child(1) {
+  background-color: var(--clr-tmkt);
+}
+.pagelink:hover:nth-child(2) {
+  background-color: green;
+}
+.pagelink:hover:nth-child(3) {
+  background-color: red;
+}
+
+.mobile {
+  display: none;
+  font-size: 28px;
+  padding: 0 8px;
+  border: 2px solid ghostwhite;
+  border-radius: 4px;
+  color: antiquewhite;
+  font-family: cursive;
+}
+
+@media (max-width: 780) {
+  .wrapheader {
+    display: flex;
+    height: 4.5rem;
+    background-color: cadetblue;
+    justify-content: space-between;
+    padding: 0 13px;
+  }
+  .logo {
+    width: 96px;
+    top: 5px;
+    left: -5px;
+  }
+  .platforms {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    transition: all 0.3s ease;
+  }
+  .pagelink {
+    position: relative;
+    transition: 0.3s ease;
+  }
+  .pagelink:hover,
+  .pagelink:active {
+    transform: translateY(13px);
+  }
+  .mobile {
+    display: flex;
+    font-size: 24px;
+  }
+  .lgscreen {
+    display: none;
+    width: 150px !important;
+  }
+}
+@media (max-width: 620) {
+  .wrapheader {
+    display: flex;
+    height: 4rem;
+    background-color: cadetblue;
+    justify-content: space-between;
+    padding: 0 13px;
+  }
+  .logo {
+    width: 88px;
+    top: 5px;
+    left: -5px;
+  }
+  .platforms {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    transition: all 0.3s ease;
+  }
+  .pagelink {
+    position: relative;
+    transition: 0.3s ease;
+  }
+  .pagelink:hover,
+  .pagelink:active {
+    transform: translateY(13px);
+  }
+  .mobile {
+    font-size: 20px;
+  }
+  .lgscreen {
+    width: 120px !important;
+  }
+}
+.productCard {
+  position: relative;
+  background: #1e1f21;
+  height: 520%;
+  width: 530%;
+  border-radius: 30px;
+  padding: 20px;
+  overflow: hidden;
+}
+.back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #d48711;
+  transition: 0.5s;
+  clip-path: circle(200px at right 100px);
+}
+.productCard:hover {
+  .back {
+    clip-path: circle(300px at right 150px);
+  }
+  .img {
+    transform: rotate(-25deg);
+  }
+}
+.imgBox {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  .img {
+    position: absolute;
+    top: 50px;
+    right: 60px;
+    height: auto;
+    width: 250px;
+    transition: 0.5s;
+    object-fit: cover;
+    z-index: 2;
+    filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.6));
+    display: none;
+  }
+
+  .img.active {
+    display: block;
+  }
+}
+
+.productDetails {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  margin: 20px;
+}
+.name {
+  position: absolute;
+  font-size: 4.5em;
+  font-weight: 700;
+  top: 100px;
+  left: 40px;
+  color: #fff;
+  z-index: 1;
+}
+.productName {
+  color: white;
+  font-size: 1.5em;
+}
+.productPrice {
+  color: #fff;
+  font-size: 1em;
+  font-weight: 500;
+}
+.rating {
+  display: flex;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.reviewCount {
+  display: flex;
+  text-align: center;
+  margin-bottom: 13px;
+}
+.size {
+  font-size: 0.5em;
+  color: #777;
+}
+.sizeOptions {
+  display: flex;
+  transition: 0.5s;
+  margin-left: -5px;
+  margin-bottom: 20px;
+}
+.sizeButton {
+  height: 30px;
+  width: 30px;
+  background: #fff;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 500;
+
+  &:hover {
+    background: #d48711;
+    color: teal;
+  }
+}
+.color {
+  font-size: 0.5em;
+  color: #777;
+}
+.colorOptions {
+  display: flex;
+}
+.colorButton {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  margin: 0 4px;
+  cursor: pointer;
+  transition: 0.5s;
+  border: 2px solid transparent;
+}
+
+.colorButton.active {
+  border: 2px solid #fff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+.addToCart {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #d48711;
+  color: #fff;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: 0.5s;
+
+  &:hover {
+    background: #fff;
+    color: #d48711;
+  }
+}

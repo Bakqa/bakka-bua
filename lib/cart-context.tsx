@@ -1,14 +1,20 @@
-"use client"
+"use client";
 
-import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
-import type { CartItem } from "./types"
+import {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  type ReactNode,
+} from "react";
+import type { CartItem } from "./types";
 
 interface CartContextType {
-  cart: CartItem[]
-  addToCart: (item: CartItem) => void
-  removeFromCart: (id: string) => void
-  updateQuantity: (id: string, quantity: number) => void
-  clearCart: () => void
+  cart: CartItem[];
+  addToCart: (item: CartItem) => void;
+  removeFromCart: (id: string) => void;
+  updateQuantity: (id: string, quantity: number) => void;
+  clearCart: () => void;
 }
 
 const CartContext = createContext<CartContextType>({
@@ -17,63 +23,69 @@ const CartContext = createContext<CartContextType>({
   removeFromCart: () => {},
   updateQuantity: () => {},
   clearCart: () => {},
-})
+});
 
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [cart, setCart] = useState<CartItem[]>([])
+  const [cart, setCart] = useState<CartItem[]>([]);
 
   // Load cart from localStorage on initial render
   useEffect(() => {
-    const savedCart = localStorage.getItem("cart")
+    const savedCart = localStorage.getItem("cart");
     if (savedCart) {
       try {
-        setCart(JSON.parse(savedCart))
+        setCart(JSON.parse(savedCart));
       } catch (error) {
-        console.error("Failed to parse cart from localStorage:", error)
+        console.error("Failed to parse cart from localStorage:", error);
       }
     }
-  }, [])
+  }, []);
 
   // Save cart to localStorage whenever it changes
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart))
-  }, [cart])
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   const addToCart = (item: CartItem) => {
     setCart((prevCart) => {
-      const existingItemIndex = prevCart.findIndex((cartItem) => cartItem.id === item.id)
+      const existingItemIndex = prevCart.findIndex(
+        (cartItem) => cartItem.id === item.id,
+      );
 
       if (existingItemIndex >= 0) {
         // Item already exists in cart, update quantity
-        const updatedCart = [...prevCart]
-        updatedCart[existingItemIndex].quantity += item.quantity
-        return updatedCart
+        const updatedCart = [...prevCart];
+        updatedCart[existingItemIndex].quantity += item.quantity;
+        return updatedCart;
       } else {
         // Item doesn't exist in cart, add it
-        return [...prevCart, item]
+        return [...prevCart, item];
       }
-    })
-  }
+    });
+  };
 
   const removeFromCart = (id: string) => {
-    setCart((prevCart) => prevCart.filter((item) => item.id !== id))
-  }
+    setCart((prevCart) => prevCart.filter((item) => item.id !== id));
+  };
 
   const updateQuantity = (id: string, quantity: number) => {
-    setCart((prevCart) => prevCart.map((item) => (item.id === id ? { ...item, quantity } : item)))
-  }
+    setCart((prevCart) =>
+      prevCart.map((item) => (item.id === id ? { ...item, quantity } : item)),
+    );
+  };
 
   const clearCart = () => {
-    setCart([])
-  }
+    setCart([]);
+  };
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, removeFromCart, updateQuantity, clearCart }}>
+    <CartContext.Provider
+      value={{ cart, addToCart, removeFromCart, updateQuantity, clearCart }}
+    >
       {children}
     </CartContext.Provider>
-  )
+  );
 }
 
 export function useCart() {
-  return useContext(CartContext)
+  return useContext(CartContext);
 }

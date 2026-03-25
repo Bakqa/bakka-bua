@@ -14,7 +14,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "BakkaBua - Your One-Stop Shop| Home",
-  description: "we offer a wide range of products to meet all your needs. From electronics to fashion, home goods to beauty products, we have it all. Shop with us and experience the convenience of finding everything you need in one place.",
+  description:
+    "we offer a wide range of products to meet all your needs. From electronics to fashion, home goods to beauty products, we have it all. Shop with us and experience the convenience of finding everything you need in one place.",
 };
 
 export default function RootLayout({

@@ -1,9 +1,16 @@
-
 import Image from "next/image";
 
-
-import Link from "next/link"
-import { Mail, Phone, MapPin, Facebook, Twitter, Instagram, Linkedin, Github } from "lucide-react"
+import Link from "next/link";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Facebook,
+  Twitter,
+  Instagram,
+  Linkedin,
+  Github,
+} from "lucide-react";
 
 export default function Footer() {
   return (
@@ -12,18 +19,19 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
-          <Link href={"#"}>
-         <Image
-           className="dark:invert"
-           src="/icon/logobua.png"
-           alt="BakqaBua's logo"
-           width={108}
-           height={40}
-           priority
-         />
-       </Link>
+            <Link href={"#"}>
+              <Image
+                className="dark:invert"
+                src="/icon/logobua.png"
+                alt="BakqaBua's logo"
+                width={108}
+                height={40}
+                priority
+              />
+            </Link>
             <p className="text-gray-400 max-w-xs">
-              We are dedicated to providing the best service to our customers and helping businesses grow.
+              We are dedicated to providing the best service to our customers
+              and helping businesses grow.
             </p>
             <div className="space-y-2">
               <div className="flex items-center gap-2">
@@ -36,7 +44,9 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="h-5 w-5 text-gray-400" />
-                <span className="text-gray-400">bakqabua-contact@gmail.com</span>
+                <span className="text-gray-400">
+                  bakqabua-contact@gmail.com
+                </span>
               </div>
             </div>
           </div>
@@ -46,27 +56,42 @@ export default function Footer() {
             <h3 className="text-xl font-bold">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-gray-400 hover:text-white transition-colors">
+                <Link
+                  href="/"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="text-gray-400 hover:text-white transition-colors">
+                <Link
+                  href="/about"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/services" className="text-gray-400 hover:text-white transition-colors">
+                <Link
+                  href="/services"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   Services
                 </Link>
               </li>
               <li>
-                <Link href="/portfolio" className="text-gray-400 hover:text-white transition-colors">
+                <Link
+                  href="/portfolio"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   Portfolio
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-gray-400 hover:text-white transition-colors">
+                <Link
+                  href="/contact"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   Contact Us
                 </Link>
               </li>
@@ -78,27 +103,42 @@ export default function Footer() {
             <h3 className="text-xl font-bold">Resources</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/blog" className="text-gray-400 hover:text-white transition-colors">
+                <Link
+                  href="/blog"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   Blog
                 </Link>
               </li>
               <li>
-                <Link href="/faq" className="text-gray-400 hover:text-white transition-colors">
+                <Link
+                  href="/faq"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   FAQ
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="text-gray-400 hover:text-white transition-colors">
+                <Link
+                  href="/privacy"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/terms" className="text-gray-400 hover:text-white transition-colors">
+                <Link
+                  href="/terms"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link href="/support" className="text-gray-400 hover:text-white transition-colors">
+                <Link
+                  href="/support"
+                  className="text-gray-400 hover:text-white transition-colors"
+                >
                   Support
                 </Link>
               </li>
@@ -108,7 +148,9 @@ export default function Footer() {
           {/* Newsletter */}
           <div className="space-y-4">
             <h3 className="text-xl font-bold">Newsletter</h3>
-            <p className="text-gray-400">Subscribe to our newsletter for the latest updates.</p>
+            <p className="text-gray-400">
+              Subscribe to our newsletter for the latest updates.
+            </p>
             <form className="space-y-2">
               <div className="flex flex-col space-y-2">
                 <input
@@ -167,9 +209,11 @@ export default function Footer() {
               <Github className="h-5 w-5" />
             </Link>
           </div>
-          <div className="text-gray-400 text-sm">© {new Date().getFullYear()} BAKQABUA. All rights reserved.</div>
+          <div className="text-gray-400 text-sm">
+            © {new Date().getFullYear()} BAKQABUA. All rights reserved.
+          </div>
         </div>
       </div>
     </footer>
-  )
+  );
 }

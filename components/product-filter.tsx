@@ -1,119 +1,199 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Label } from "@/components/ui/label"
+import { useState, useCallback } from "react";
+import { Search, Filter, SortAsc } from "lucide-react";
 
-const categories = [
-  { id: "clothing", name: "Clothing" },
-  { id: "accessories", name: "Accessories" },
-  { id: "shoes", name: "Shoes" },
-  { id: "sale", name: "Sale" },
-]
+interface FilterOptions {
+  priceRange: [number, number];
+  categories: string[];
+  rating: number;
+  inStock: boolean;
+  searchQuery: string;
+  sortBy: "price-asc" | "price-desc" | "newest" | "popular" | "rating";
+}
 
-const colors = [
-  { id: "black", name: "Black" },
-  { id: "white", name: "White" },
-  { id: "blue", name: "Blue" },
-  { id: "red", name: "Red" },
-  { id: "green", name: "Green" },
-]
+interface FilterPanelProps {
+  categories: Array<{ id: string; name: string; count: number }>;
+  onFilterChange: (filters: FilterOptions) => void;
+}
 
-export default function ProductFilters() {
-  const router = useRouter()
-  const searchParams = useSearchParams()
-  const [selectedCategory, setSelectedCategory] = useState<string>(searchParams.get("category") || "")
+export default function ProductFilter({
+  categories,
+  onFilterChange,
+}: FilterPanelProps) {
+  const [filters, setFilters] = useState<FilterOptions>({
+    priceRange: [0, 1000],
+    categories: [],
+    rating: 0,
+    inStock: true,
+    searchQuery: "",
+    sortBy: "popular",
+  });
 
-  const handleCategoryChange = (category: string) => {
-    const newCategory = category === selectedCategory ? "" : category
-    setSelectedCategory(newCategory)
+  const [isExpanded, setIsExpanded] = useState(false);
 
-    const params = new URLSearchParams(searchParams.toString())
-    if (newCategory) {
-      params.set("category", newCategory)
-    } else {
-      params.delete("category")
-    }
+  const updateFilter = useCallback(
+    (key: keyof FilterOptions, value: any) => {
+      const updated = { ...filters, [key]: value };
+      setFilters(updated);
+      onFilterChange(updated);
+    },
+    [filters, onFilterChange],
+  );
 
-    router.push(`/products?${params.toString()}`)
-  }
+  const toggleCategory = (categoryId: string) => {
+    const updated = filters.categories.includes(categoryId)
+      ? filters.categories.filter((id) => id !== categoryId)
+      : [...filters.categories, categoryId];
+    updateFilter("categories", updated);
+  };
+
+  const resetFilters = () => {
+    const reset: FilterOptions = {
+      priceRange: [0, 1000],
+      categories: [],
+      rating: 0,
+      inStock: true,
+      searchQuery: "",
+      sortBy: "popular",
+    };
+    setFilters(reset);
+    onFilterChange(reset);
+  };
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h3 className="text-lg font-semibold mb-4">Filters</h3>
-        <Accordion type="multiple" defaultValue={["categories", "colors"]}>
-          <AccordionItem value="categories">
-            <AccordionTrigger>Categories</AccordionTrigger>
-            <AccordionContent>
-              <div className="space-y-2">
-                {categories.map((category) => (
-                  <div key={category.id} className="flex items-center space-x-2">
-                    <Checkbox
-                      id={`category-${category.id}`}
-                      checked={selectedCategory === category.id}
-                      onCheckedChange={() => handleCategoryChange(category.id)}
-                    />
-                    <Label htmlFor={`category-${category.id}`} className="text-sm font-normal cursor-pointer">
-                      {category.name}
-                    </Label>
-                  </div>
-                ))}
-              </div>
-            </AccordionContent>
-          </AccordionItem>
-
-          <AccordionItem value="colors">
-            <AccordionTrigger>Colors</AccordionTrigger>
-            <AccordionContent>
-              <div className="space-y-2">
-                {colors.map((color) => (
-                  <div key={color.id} className="flex items-center space-x-2">
-                    <Checkbox id={`color-${color.id}`} />
-                    <Label htmlFor={`color-${color.id}`} className="text-sm font-normal cursor-pointer">
-                      {color.name}
-                    </Label>
-                  </div>
-                ))}
-              </div>
-            </AccordionContent>
-          </AccordionItem>
-
-          <AccordionItem value="price">
-            <AccordionTrigger>Price Range</AccordionTrigger>
-            <AccordionContent>
-              <div className="space-y-2">
-                <div className="flex items-center space-x-2">
-                  <Checkbox id="price-under-50" />
-                  <Label htmlFor="price-under-50" className="text-sm font-normal cursor-pointer">
-                    Under $50
-                  </Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Checkbox id="price-50-100" />
-                  <Label htmlFor="price-50-100" className="text-sm font-normal cursor-pointer">
-                    $50 - $100
-                  </Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Checkbox id="price-100-200" />
-                  <Label htmlFor="price-100-200" className="text-sm font-normal cursor-pointer">
-                    $100 - $200
-                  </Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Checkbox id="price-over-200" />
-                  <Label htmlFor="price-over-200" className="text-sm font-normal cursor-pointer">
-                    Over $200
-                  </Label>
-                </div>
-              </div>
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 sticky top-20">
+      {/* Search Bar */}
+      <div className="mb-6">
+        <div className="relative">
+          <Search className="absolute left-3 top-3 text-gray-400" size={20} />
+          <input
+            type="text"
+            placeholder="Search products..."
+            value={filters.searchQuery}
+            onChange={(e) => updateFilter("searchQuery", e.target.value)}
+            className="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+          />
+        </div>
       </div>
+
+      {/* Sort By */}
+      <div className="mb-6">
+        <label className="block text-sm font-semibold mb-3 flex items-center gap-2">
+          <SortAsc size={18} />
+          Sort By
+        </label>
+        <select
+          value={filters.sortBy}
+          onChange={(e) => updateFilter("sortBy", e.target.value as any)}
+          className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+        >
+          <option value="popular">Most Popular</option>
+          <option value="newest">Newest</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="rating">Top Rated</option>
+        </select>
+      </div>
+
+      {/* Price Range */}
+      <div className="mb-6">
+        <label className="block text-sm font-semibold mb-3">Price Range</label>
+        <input
+          type="range"
+          min="0"
+          max="1000"
+          value={filters.priceRange[1]}
+          onChange={(e) =>
+            updateFilter("priceRange", [
+              filters.priceRange[0],
+              parseInt(e.target.value),
+            ])
+          }
+          className="w-full accent-blue-500"
+        />
+        <div className="flex justify-between mt-2 text-sm text-gray-600 dark:text-gray-400">
+          <span>${filters.priceRange[0]}</span>
+          <span>${filters.priceRange[1]}</span>
+        </div>
+      </div>
+
+      {/* Categories */}
+      <div className="mb-6">
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="w-full flex justify-between items-center text-sm font-semibold mb-2"
+        >
+          <span className="flex items-center gap-2">
+            <Filter size={18} />
+            Categories
+          </span>
+          <span
+            className={`transition-transform ${isExpanded ? "rotate-180" : ""}`}
+          >
+            ▼
+          </span>
+        </button>
+        {isExpanded && (
+          <div className="space-y-2">
+            {categories.map((cat) => (
+              <label
+                key={cat.id}
+                className="flex items-center gap-2 cursor-pointer hover:opacity-80"
+              >
+                <input
+                  type="checkbox"
+                  checked={filters.categories.includes(cat.id)}
+                  onChange={() => toggleCategory(cat.id)}
+                  className="rounded accent-blue-500"
+                />
+                <span className="text-sm">{cat.name}</span>
+                <span className="text-xs text-gray-500">({cat.count})</span>
+              </label>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Rating Filter */}
+      <div className="mb-6">
+        <label className="block text-sm font-semibold mb-3">
+          Minimum Rating
+        </label>
+        <select
+          value={filters.rating}
+          onChange={(e) => updateFilter("rating", parseInt(e.target.value))}
+          className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+        >
+          <option value={0}>All Ratings</option>
+          <option value={1}>★ 1+</option>
+          <option value={2}>★★ 2+</option>
+          <option value={3}>★★★ 3+</option>
+          <option value={4}>★★★★ 4+</option>
+          <option value={5}>★★★★★ 5</option>
+        </select>
+      </div>
+
+      {/* In Stock Toggle */}
+      <div className="mb-6">
+        <label className="flex items-center gap-2 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={filters.inStock}
+            onChange={(e) => updateFilter("inStock", e.target.checked)}
+            className="rounded accent-blue-500"
+          />
+          <span className="text-sm font-medium">In Stock Only</span>
+        </label>
+      </div>
+
+      {/* Reset Button */}
+      <button
+        onClick={resetFilters}
+        className="w-full py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm font-semibold hover:bg-gray-50 dark:hover:bg-gray-700 transition"
+      >
+        Reset Filters
+      </button>
     </div>
-  )
+  );
 }

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "../globals.css";
 import { ClerkProvider, SignInButton } from "@clerk/nextjs";
 import Header from "@/components/header";
+import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
   title: "BakkaBua |Home",
@@ -14,13 +15,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-     <ClerkProvider>
-
-    <main className="min-h-full flex flex-col" >
+    <ClerkProvider>
+      <main className="min-h-full flex flex-col">
         <Header />
         <SignInButton />
         {children}
-    </main>
-      </ClerkProvider>
+        <Footer />
+      </main>
+    </ClerkProvider>
   );
 }
